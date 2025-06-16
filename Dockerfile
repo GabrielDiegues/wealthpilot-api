@@ -1,16 +1,19 @@
-FROM ubuntu:latest AS build
+# Stage 1 - Build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+WORKDIR /app
+
 COPY . .
 
-RUN apt-get install maven -y
-RUN mvn clean install
+RUN mvn clean package -DskipTests
 
+# Stage 2 - Run
 FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build /app/target/WealthPilot-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
-COPY --from=build /target/WealthPilot-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+ENTRYPOINT ["java", "-jar", "app.jar"]
