@@ -1,5 +1,6 @@
 package com.wollace.wealthPilot.model;
 
+import com.wollace.wealthPilot.dto.UserDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,11 @@ public class User {
         this.email = email;
         this.password = password;
         this.id = id;
+    }
+
+
+    public User(UserDto userDto) {
+
     }
 
     public User() {
