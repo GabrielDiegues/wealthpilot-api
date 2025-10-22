@@ -1,13 +1,15 @@
 package com.wollace.wealthPilot.model.appUser;
 
-import com.wollace.wealthPilot.dto.AppUserDto;
+import com.wollace.wealthPilot.dto.CreateAppUserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppUser {
@@ -29,9 +31,9 @@ public class AppUser {
 
 
     // UserDto to User constructor
-    public AppUser(AppUserDto appUserDto) {
-        this.financialGoal = appUserDto.financialGoal();
-        this.firebaseUid = appUserDto.firebaseUid();
-        this.riskProfile = appUserDto.riskProfile();
+    public AppUser(CreateAppUserDto createAppUserDto) {
+        this.financialGoal = createAppUserDto.financialGoal();
+        this.firebaseUid = createAppUserDto.firebaseUid();
+        this.riskProfile = createAppUserDto.riskProfile();
     }
 }
